@@ -35,21 +35,17 @@ class BrowsePage extends React.Component {
 
   async componentDidMount() {
     try {
-      let userData = await API.get('/', {
-        params: {
-          results: 1,
-          inc: 'name,email,picture',
-        },
-      })
-
-      userData = userData.data.results[0]
-
-      this.setState({
-        ...this.state,
-        ...{
-          name: `${userData.name.first} ${userData.name.last}`,
-        },
-      })
+      //let { data } = await API.pieToken()
+      let { questions } = await API.assessmentQuestions({ assessmentId: 1 })
+      console.log(questions)
+      //console.log(response)
+      // userData = userData.data.results[0]
+      // this.setState({
+      //   ...this.state,
+      //   ...{
+      //     name: `${userData.name.first} ${userData.name.last}`,
+      //   },
+      // })
     } catch (e) {
       console.log(e)
     }
