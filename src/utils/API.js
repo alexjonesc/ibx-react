@@ -28,6 +28,10 @@ const API = {
     return _get('auth/pie/token')
   },
 
+  filters: async () => {
+    return _get('filters')
+  },
+
   assessmentQuestions: async ({ assessmentId }) => {
     return _get(`assessments/${assessmentId}/questions`)
   },
