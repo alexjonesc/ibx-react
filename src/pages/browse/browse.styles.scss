@@ -2,4 +2,21 @@
   // .title {
   //   color: fuchsia;
   // }
+  &__content {
+    display: flex;
+    padding: 20px;
+
+    .item-filters {
+      flex: 1;
+      margin-right: 20px;
+      padding: 20px;
+      min-width: 350px;
+    }
+
+    .items {
+      flex: 3;
+      padding: 20px;
+      border: 1px solid;
+    }
+  }
 }
