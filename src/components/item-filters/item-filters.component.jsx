@@ -50,10 +50,10 @@ class ItemFilters extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  filters: state.itemFilters.filters,
-  activeFilters: state.itemFilters.activeFilters,
-  selectedFilters: state.itemFilters.selectedFilters,
+const mapStateToProps = ({ itemFilters: { filters, activeFilters, selectedFilters } }) => ({
+  filters,
+  activeFilters,
+  selectedFilters,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -32,6 +32,12 @@ const API = {
     return _get('filters')
   },
 
+  items: async (filters = {}) => {
+    return _get('items', {
+      params: filters,
+    })
+  },
+
   assessmentQuestions: async ({ assessmentId }) => {
     return _get(`assessments/${assessmentId}/questions`)
   },

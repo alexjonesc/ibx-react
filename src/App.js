@@ -1,5 +1,5 @@
 import React from 'react'
-import Browse from './pages/browse/browse.component'
+import BrowsePage from './pages/browse/browse-page.component'
 import Auth from './utils/Auth'
 
 class App extends React.Component {
@@ -15,7 +15,7 @@ class App extends React.Component {
 
   render() {
     const { ready } = this.state
-    return <div className="App">{ready ? <Browse /> : 'loading...'}</div>
+    return <div className="App">{ready ? <BrowsePage /> : 'loading...'}</div>
   }
 
   authReady() {
