@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import API from '../../utils/API'
 import { setItems } from '../../redux/item-list/item-list.actions'
+import { selectItemListItems, selectItemListCount } from '../../redux/item-list/item-list.selectors'
 
 import './item-list.styles.scss'
 
@@ -25,7 +26,12 @@ class ItemList extends React.Component {
           </div>
         </div>
       ))
-    return <div className="item-list">{items}</div>
+    return (
+      <div className="item-list">
+        <div className="item-list__count">Viewing: {this.props.itemCount} items</div>
+        <div className="item-list__items">{items}</div>
+      </div>
+    )
   }
 
   async componentDidMount() {
@@ -39,8 +45,9 @@ class ItemList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ itemList: { items } }) => ({
-  items,
+const mapStateToProps = (state) => ({
+  items: selectItemListItems(state),
+  itemCount: selectItemListCount(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

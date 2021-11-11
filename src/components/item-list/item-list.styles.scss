@@ -1,3 +1,11 @@
+.item-list {
+  &__count {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
 .item-list-item {
   margin-bottom: 20px;
   border: 1px solid gray;
