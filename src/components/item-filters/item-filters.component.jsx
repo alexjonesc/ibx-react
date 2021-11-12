@@ -2,6 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import API from '../../utils/API'
 import { setFilters, setSelectedFilters } from '../../redux/item-filters/item-filters.actions'
+import {
+  selectItemFiltersFilters,
+  selectItemFiltersActiveFilters,
+  selectItemFiltersSelectedFilters,
+} from '../../redux/item-filters/item-filters.selectors'
 
 import './item-filters.styles.scss'
 
@@ -50,10 +55,10 @@ class ItemFilters extends React.Component {
   }
 }
 
-const mapStateToProps = ({ itemFilters: { filters, activeFilters, selectedFilters } }) => ({
-  filters,
-  activeFilters,
-  selectedFilters,
+const mapStateToProps = (state) => ({
+  filters: selectItemFiltersFilters(state),
+  activeFilters: selectItemFiltersActiveFilters(state),
+  selectedFilters: selectItemFiltersSelectedFilters(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

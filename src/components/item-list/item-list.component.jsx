@@ -37,7 +37,6 @@ class ItemList extends React.Component {
   async componentDidMount() {
     try {
       let { items } = await API.items()
-      console.log(items)
       this.props.setItems(items)
     } catch (e) {
       console.warn(e)
