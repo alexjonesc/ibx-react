@@ -16,24 +16,46 @@ class ItemFilters extends React.Component {
 
     // function bindings
     this.onFiltershange = this.onFiltershange.bind(this)
+    this.filterIsSelected = this.filterIsSelected.bind(this)
   }
 
   onFiltershange(e) {
-    const uniqSelectedFilters = new Set([...this.props.selectedFilters, e.target.value])
+    const uniqSelectedFilters = new Set([...this.props.selectedFilters])
+
+    if (e.target.checked) {
+      uniqSelectedFilters.add(e.target.value)
+    } else {
+      uniqSelectedFilters.delete(e.target.value)
+    }
+
     this.props.setSelectedFilters([...uniqSelectedFilters])
+  }
+
+  filterIsSelected({ filterId, filterItemId }) {
+    return this.props.selectedFilters.includes(filterItemId)
   }
 
   render() {
     const { activeFilters } = this.props
     const filters = this.props.filters
-      .filter((o) => activeFilters.includes(o.id))
-      .map((o) => (
-        <form className="item-filters" key={o.id}>
-          <fieldset id={o.id} className="bn">
-            <legend className="fw7">{o.name}</legend>
-            {o.items.map((item) => (
+      .filter((filter) => activeFilters.includes(filter.id))
+      .map((filter) => (
+        <form className="item-filters" key={filter.id}>
+          <fieldset id={filter.id} className="bn">
+            <legend className="fw7">{filter.name}</legend>
+            {filter.items.map((item) => (
               <div className="flex items-center" key={item.id}>
-                <input className="mr2" type="checkbox" id={item.id} value={item.id} onChange={this.onFiltershange} />
+                <input
+                  className="mr2"
+                  type="checkbox"
+                  id={item.id}
+                  value={item.id}
+                  onChange={this.onFiltershange}
+                  checked={this.filterIsSelected({
+                    filterId: filter.id,
+                    filterItemId: item.id,
+                  })}
+                />
                 <label htmlFor={item.id} className="lh-copy">
                   {item.name}
                 </label>
@@ -47,8 +69,10 @@ class ItemFilters extends React.Component {
 
   async componentDidMount() {
     try {
-      let { filters } = await API.filters()
-      this.props.setFilters(filters)
+      if (!this.props.filters.length) {
+        let { filters } = await API.filters()
+        this.props.setFilters(filters)
+      }
     } catch (e) {
       console.warn(e)
     }

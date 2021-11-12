@@ -11,5 +11,5 @@ export const selectItemFiltersActiveFilters = createSelector(
 
 export const selectItemFiltersSelectedFilters = createSelector(
   [selectItemFilters],
-  (itemFilters) => itemFilters.SelectedFilters
+  (itemFilters) => itemFilters.selectedFilters
 )
