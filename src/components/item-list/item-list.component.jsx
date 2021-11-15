@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import API from '../../utils/API'
-import { setItems } from '../../redux/item-list/item-list.actions'
+import { fetchItems } from '../../redux/item-list/item-list.actions'
 import { selectItemListItems, selectItemListCount } from '../../redux/item-list/item-list.selectors'
 
 import './item-list.styles.scss'
@@ -26,31 +25,38 @@ class ItemList extends React.Component {
           </div>
         </div>
       ))
-    return (
-      <div className="item-list">
+
+    const itemsList = () => (
+      <div className="item-list__content">
         <div className="item-list__count">Viewing: {this.props.itemCount} items</div>
         <div className="item-list__items">{items}</div>
       </div>
     )
+
+    const itemsListLoadng = () => (
+      <div className="item-list__content">
+        <div>Loading items...</div>
+      </div>
+    )
+
+    return (
+      <div className="item-list">{this.props.isFetching ? itemsListLoadng() : itemsList()}</div>
+    )
   }
 
   async componentDidMount() {
-    try {
-      let { items } = await API.items()
-      this.props.setItems(items)
-    } catch (e) {
-      console.warn(e)
-    }
+    this.props.fetchItems()
   }
 }
 
 const mapStateToProps = (state) => ({
   items: selectItemListItems(state),
   itemCount: selectItemListCount(state),
+  isFetching: state.itemList.isFetching,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setItems: (items) => dispatch(setItems(items)),
+  fetchItems: () => dispatch(fetchItems()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList)
