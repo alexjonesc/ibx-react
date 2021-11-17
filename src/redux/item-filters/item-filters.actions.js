@@ -15,22 +15,9 @@ export const fetchFiltersError = (errorMessage) => ({
   payload: errorMessage,
 })
 
-export const fetchFilters = () => {
-  return async (dispatch, getState) => {
-    const { filters: cfFilters } = getState().itemFilters
-
-    if (!cfFilters.length) {
-      try {
-        dispatch(fetchFiltersStart())
-        let { filters } = await API.filters()
-        dispatch(fetchFiltersSuccess(filters))
-      } catch (e) {
-        console.warn(e)
-        fetchFiltersError(e)
-      }
-    }
-  }
-}
+export const getFilters = () => ({
+  type: ItemFiltersTypes.GET_FILTERS,
+})
 
 export const setActiveFilters = (activeFilters) => ({
   type: 'SET_ACTIVE_FILTERS',
