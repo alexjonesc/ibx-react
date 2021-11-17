@@ -1,5 +1,4 @@
 import ItemFiltersTypes from './item-filters.types'
-import API from '../../utils/API'
 
 export const fetchFiltersStart = () => ({
   type: ItemFiltersTypes.FETCH_FILTERS_START,

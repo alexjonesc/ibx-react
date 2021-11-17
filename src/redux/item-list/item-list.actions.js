@@ -1,5 +1,4 @@
 import ItemListTypes from './item-list.types'
-import API from '../../utils/API'
 
 export const fetchItemsStart = () => ({
   type: ItemListTypes.FETCH_ITEMS_START,
