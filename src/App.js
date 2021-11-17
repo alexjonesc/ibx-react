@@ -1,34 +1,25 @@
 import React from 'react'
 import BrowsePage from './pages/browse/browse-page.component'
-import Auth from './utils/Auth'
+import { connect } from 'react-redux'
+import { initBrowsePage } from './redux/browse-page/browse-page.actions'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      ready: false,
-    }
-
-    this.authReady = this.authReady.bind(this)
-  }
-
   render() {
-    const { ready } = this.state
-    return <div className="App">{ready ? <BrowsePage /> : 'loading...'}</div>
-  }
-
-  authReady() {
-    this.setState({
-      ...this.state,
-      ready: true,
-    })
+    const { browsePageReady } = this.props
+    return <div className="App">{browsePageReady ? <BrowsePage /> : 'loading...'}</div>
   }
 
   async componentDidMount() {
-    await Auth.init()
-    this.authReady()
+    this.props.initBrowsePage()
   }
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  browsePageReady: state.browsePage.ready,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  initBrowsePage: () => dispatch(initBrowsePage()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

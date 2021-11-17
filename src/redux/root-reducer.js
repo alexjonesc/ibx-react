@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+import browsePageReducer from './browse-page/browse-page.reducer'
 import itemFiltersReducer from './item-filters/item-filters.reducer'
 import itemListReducer from './item-list/items-list.reducer'
 
@@ -12,6 +13,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  browsePage: browsePageReducer,
   itemFilters: itemFiltersReducer,
   itemList: itemListReducer,
 })
