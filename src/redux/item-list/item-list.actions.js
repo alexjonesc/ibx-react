@@ -15,15 +15,6 @@ export const fetchItemsError = (errorMessage) => ({
   payload: errorMessage,
 })
 
-export const fetchItems = () => {
-  return async (dispatch) => {
-    try {
-      dispatch(fetchItemsStart())
-      let { items } = await API.items()
-      dispatch(fetchItemsSuccess(items))
-    } catch (e) {
-      console.warn(e)
-      dispatch(fetchItemsError(e))
-    }
-  }
-}
+export const getItems = () => ({
+  type: ItemListTypes.GET_ITEMS,
+})

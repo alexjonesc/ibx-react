@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchItems } from '../../redux/item-list/item-list.actions'
+import { getItems } from '../../redux/item-list/item-list.actions'
 import { selectItemListItems, selectItemListCount } from '../../redux/item-list/item-list.selectors'
 import ItemFiltersTypes from '../../redux/item-filters/item-filters.types'
 import { subscribeAfter } from 'redux-subscribe-action'
@@ -51,10 +51,10 @@ class ItemList extends React.Component {
 
   async componentDidMount() {
     this.debouncedFetchItems = debounce(() => {
-      this.props.fetchItems()
+      this.props.getItems()
     }, 2000)
 
-    this.props.fetchItems()
+    this.props.getItems()
 
     this.unsubscribe = subscribeAfter((action) => {
       switch (action.type) {
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchItems: () => dispatch(fetchItems()),
+  getItems: () => dispatch(getItems()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList)

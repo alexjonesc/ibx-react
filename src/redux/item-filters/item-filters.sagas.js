@@ -20,7 +20,6 @@ export function* fetchFilters() {
 }
 
 export function* getFilters() {
-  console.log('XXXX')
   yield takeLatest(ItemFiltersTypes.GET_FILTERS, fetchFilters)
 }
 
