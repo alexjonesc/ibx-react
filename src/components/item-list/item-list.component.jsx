@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchItems } from '../../redux/item-list/item-list.actions'
 import { selectItemListItems, selectItemListCount } from '../../redux/item-list/item-list.selectors'
+import ItemFiltersTypes from '../../redux/item-filters/item-filters.types'
+import { subscribeAfter } from 'redux-subscribe-action'
+import debounce from 'lodash.debounce'
 
 import './item-list.styles.scss'
 
@@ -9,7 +12,9 @@ class ItemList extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      unsubscribe: () => ({}),
+    }
   }
 
   render() {
@@ -45,7 +50,24 @@ class ItemList extends React.Component {
   }
 
   async componentDidMount() {
+    this.debouncedFetchItems = debounce(() => {
+      this.props.fetchItems()
+    }, 2000)
+
     this.props.fetchItems()
+
+    this.unsubscribe = subscribeAfter((action) => {
+      switch (action.type) {
+        case ItemFiltersTypes.SET_SELECTED_FILTERS:
+          this.debouncedFetchItems()
+          break
+        default:
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 }
 
