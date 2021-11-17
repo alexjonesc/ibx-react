@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getFilters, setSelectedFilters } from '../../redux/item-filters/item-filters.actions'
+import { setSelectedFilters } from '../../redux/item-filters/item-filters.actions'
 import {
   selectItemFiltersFilters,
   selectItemFiltersActiveFilters,
@@ -65,10 +65,6 @@ class ItemFilters extends React.Component {
       ))
     return filters
   }
-
-  async componentDidMount() {
-    this.props.getFilters()
-  }
 }
 
 const mapStateToProps = (state) => ({
@@ -78,7 +74,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getFilters: () => dispatch(getFilters()),
   setSelectedFilters: (selectedFilters) => dispatch(setSelectedFilters(selectedFilters)),
 })
 
