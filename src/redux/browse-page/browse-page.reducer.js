@@ -2,7 +2,6 @@ import BrowsePageTypes from './browse-page.types'
 
 const INITIAL_STATE = {
   ready: false,
-  test: '123',
 }
 
 const browsePageReducer = (state = INITIAL_STATE, action) => {

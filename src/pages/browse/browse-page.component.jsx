@@ -23,7 +23,7 @@ class BrowsePage extends React.Component {
     return <BrowseViewWithSpinner isLoading={this.props.isLoading} />
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.initBrowsePage()
   }
 }

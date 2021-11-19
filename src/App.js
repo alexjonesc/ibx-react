@@ -1,17 +1,17 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import BrowsePage from './pages/browse/browse-page.component'
-
-const TestPage = () => <div>Test Page</div>
+import Assessment from './pages/assessment/assessment-page.component'
 
 class App extends React.Component {
   render() {
     return (
       <div className="app">
         <Routes>
-          <Route exact path="/" element={<Navigate replace to="/browse" />}></Route>
-          <Route exact path="/browse" element={<BrowsePage />}></Route>
-          <Route exact path="/assessment" element={<TestPage />}></Route>
+          <Route path="/" element={<Navigate replace to="/browse" />}></Route>
+          <Route path="/browse" element={<BrowsePage />}></Route>
+          <Route path="/assessment" element={<Navigate replace to="/browse" />}></Route>
+          <Route path="/assessment/:id" element={<Assessment />}></Route>
         </Routes>
       </div>
     )

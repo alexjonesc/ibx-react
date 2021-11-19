@@ -36,6 +36,10 @@ const API = {
     return _get('items', filters)
   },
 
+  assessment: async ({ assessmentId }) => {
+    return await _get(`assessments/${assessmentId}`)
+  },
+
   assessmentQuestions: async ({ assessmentId }) => {
     return _get(`assessments/${assessmentId}/questions`)
   },
