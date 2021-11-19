@@ -11,7 +11,6 @@ export function* bootstrap() {
 }
 
 export function* initBrowsePage() {
-  console.log('BROWSE_PAGE_INITBROWSE_PAGE_INIT')
   yield takeLatest(BrowsePageTypes.BROWSE_PAGE_INIT, bootstrap)
 }
 

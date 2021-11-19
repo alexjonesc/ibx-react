@@ -1,25 +1,21 @@
 import React from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import BrowsePage from './pages/browse/browse-page.component'
-import { connect } from 'react-redux'
-import { initBrowsePage } from './redux/browse-page/browse-page.actions'
+
+const TestPage = () => <div>Test Page</div>
 
 class App extends React.Component {
   render() {
-    const { browsePageReady } = this.props
-    return <div className="App">{browsePageReady ? <BrowsePage /> : 'loading...'}</div>
-  }
-
-  async componentDidMount() {
-    this.props.initBrowsePage()
+    return (
+      <div className="app">
+        <Routes>
+          <Route exact path="/" element={<Navigate replace to="/browse" />}></Route>
+          <Route exact path="/browse" element={<BrowsePage />}></Route>
+          <Route exact path="/assessment" element={<TestPage />}></Route>
+        </Routes>
+      </div>
+    )
   }
 }
 
-const mapStateToProps = (state) => ({
-  browsePageReady: state.browsePage.ready,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  initBrowsePage: () => dispatch(initBrowsePage()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
