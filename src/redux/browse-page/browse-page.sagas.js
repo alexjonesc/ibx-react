@@ -7,6 +7,7 @@ import Auth from '../../utils/Auth'
 export function* bootstrap() {
   yield Auth.init()
   yield put(getFilters())
+  //yield delay(1000) // simulate loading time
   yield put(browsePageReady(true))
 }
 
