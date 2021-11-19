@@ -33,9 +33,7 @@ const API = {
   },
 
   items: async (filters = {}) => {
-    return _get('items', {
-      params: filters,
-    })
+    return _get('items', filters)
   },
 
   assessmentQuestions: async ({ assessmentId }) => {

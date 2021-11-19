@@ -1,13 +1,19 @@
-import { takeLatest, call, put, all, delay } from '@redux-saga/core/effects'
+import { takeLatest, call, put, all, delay, select } from '@redux-saga/core/effects'
 import ItemListTypes from './item-list.types'
 import ItemFiltersTypes from '../item-filters/item-filters.types'
 import { fetchItemsStart, fetchItemsSuccess, fetchItemsError } from './item-list.actions'
+import { selectItemFiltersSelectedFilters } from '../../redux/item-filters/item-filters.selectors'
 import API from '../../utils/API'
 
 export function* fetchItems() {
   try {
+    const selecteFilters = yield select(selectItemFiltersSelectedFilters)
+    const filters = {
+      itemType: selecteFilters,
+    }
+
     yield put(fetchItemsStart())
-    let { items } = yield API.items()
+    let { items } = yield API.items(filters)
     yield put(fetchItemsSuccess(items))
   } catch (e) {
     console.warn(e)
