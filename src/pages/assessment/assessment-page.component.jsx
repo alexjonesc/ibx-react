@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { initAssessment } from '../../redux/assessment/assessment.actions'
 import {
@@ -26,19 +25,18 @@ const AssessmentView = (props) => {
 
 const AssessmentVIewWithSpinner = WithSpinner(AssessmentView)
 
-const Assessment = (props) => {
+const Assessment = ({ isLoading, initAssessment, ...otherPros }) => {
   const { id } = useParams()
-  const dispatch = useDispatch()
-  const { isLoading } = props
+  //const dispatch = useDispatch()
 
   // initialize assessment
   useEffect(() => {
-    dispatch(initAssessment(id))
-  }, [dispatch, id])
+    initAssessment(id)
+  }, [initAssessment, id])
 
   return (
     <div>
-      <AssessmentVIewWithSpinner isLoading={isLoading} {...props} />
+      <AssessmentVIewWithSpinner isLoading={isLoading} {...otherPros} />
     </div>
   )
 }
@@ -49,4 +47,8 @@ const mapStateToProps = (state) => ({
   isLoading: !state.assessment.assessment,
 })
 
-export default connect(mapStateToProps)(Assessment)
+const mapDispatchToProps = (dispatch) => ({
+  setSelectedFilters: (id) => dispatch(initAssessment(id)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Assessment)
