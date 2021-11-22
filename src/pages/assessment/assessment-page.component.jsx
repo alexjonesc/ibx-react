@@ -21,7 +21,7 @@ const AssessmentView = (props) => {
         <div>
           Assessment Title: {title} (assessmentId: {assessmentId}),
         </div>
-        <div class="assessment-questions">
+        <div className="assessment-questions">
           {questions.map(({ item, ...question }) => (
             <div className="assessment-questions__question" key={item.itemRevId}>
               <div>Item Type: {item.itemType}</div>

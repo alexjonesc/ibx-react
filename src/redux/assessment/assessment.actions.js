@@ -10,12 +10,12 @@ export const assessmentReady = (ready) => ({
   payload: ready,
 })
 
-export const fetchAssessmentStart = () => ({
-  type: AssessmentTypes.FETCH_ASSESSMENT_START,
+export const fetchAssessment = () => ({
+  type: AssessmentTypes.FETCH_ASSESSMENT,
 })
 
-export const fetchAssessmentSuccess = (assessment) => ({
-  type: AssessmentTypes.FETCH_ASSESSMENT_SUCCESS,
+export const setAssessment = (assessment) => ({
+  type: AssessmentTypes.SET_ASSESSMENT,
   payload: assessment,
 })
 

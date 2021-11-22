@@ -1,8 +1,8 @@
 import { takeLatest, call, put, all } from '@redux-saga/core/effects'
 import AssessmentTypes from './assessment.types'
 import {
-  fetchAssessmentStart,
-  fetchAssessmentSuccess,
+  fetchAssessment,
+  setAssessment,
   fetchAssessmentError,
   setAssessmentQuestions,
 } from './assessment.actions'
@@ -14,11 +14,11 @@ export function* bootstrap(action) {
 
   const assessmentId = action.payload
   try {
-    yield put(fetchAssessmentStart())
+    yield put(fetchAssessment())
     let { assessment } = yield API.assessment({ assessmentId })
     let { questions } = yield API.assessmentQuestions({ assessmentId })
 
-    yield put(fetchAssessmentSuccess(assessment))
+    yield put(setAssessment(assessment))
     yield put(setAssessmentQuestions(questions))
   } catch (e) {
     console.warn(e)
