@@ -4,6 +4,7 @@ import {
   fetchAssessmentStart,
   fetchAssessmentSuccess,
   fetchAssessmentError,
+  setAssessmentQuestions,
 } from './assessment.actions'
 // import Auth from '../../utils/Auth'
 import API from '../../utils/API'
@@ -15,7 +16,10 @@ export function* bootstrap(action) {
   try {
     yield put(fetchAssessmentStart())
     let { assessment } = yield API.assessment({ assessmentId })
+    let { questions } = yield API.assessmentQuestions({ assessmentId })
+
     yield put(fetchAssessmentSuccess(assessment))
+    yield put(setAssessmentQuestions(questions))
   } catch (e) {
     console.warn(e)
     put(fetchAssessmentError(e))

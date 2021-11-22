@@ -1,11 +1,5 @@
 import axios from 'axios'
 
-// const API = axios.create({
-//   baseURL: `${process.env.VUE_APP_BASE_URI}/api/v1/`,
-//   headers: {},
-//   //withCredentials: process.env.VUE_APP_AUTHX_DISABLED ? false : true,
-// })
-
 const HTTP = axios.create({
   baseURL: `${process.env.REACT_APP_IBX_API_URL}/api/v1/`,
   withCredentials: true,

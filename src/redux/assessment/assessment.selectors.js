@@ -2,14 +2,14 @@ import { createSelector } from 'reselect'
 
 const selectAssessmentState = (state) => state.assessment
 
-export const selectHasAssessment = createSelector([selectAssessmentState], (assessmentState) => {
-  console.log(!assessmentState.assessment, assessmentState.assessment)
-  return !assessmentState.assessment
-})
+export const selectHasAssessment = createSelector([selectAssessmentState], (assessmentState) =>
+  Boolean(assessmentState.assessment)
+)
 
-const selectAssessment = createSelector([selectAssessmentState], (assessmentState) => {
-  return assessmentState.assessment ? assessmentState.assessment : {}
-})
+const selectAssessment = createSelector(
+  [selectHasAssessment, selectAssessmentState],
+  (hasAsmt, asmtState) => (hasAsmt ? asmtState.assessment : {})
+)
 
 export const selectAssessmentId = createSelector(
   [selectAssessment],
@@ -17,3 +17,8 @@ export const selectAssessmentId = createSelector(
 )
 
 export const selectAssessmentTitle = createSelector([selectAssessment], ({ title }) => title)
+
+export const selectAssessmentQuestions = createSelector(
+  [selectAssessmentState],
+  (asmtState) => asmtState.questions
+)

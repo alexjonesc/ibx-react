@@ -23,3 +23,8 @@ export const fetchAssessmentError = (errorMessage) => ({
   type: AssessmentTypes.FETCH_ASSESSMENT_ERROR,
   payload: errorMessage,
 })
+
+export const setAssessmentQuestions = (questions) => ({
+  type: AssessmentTypes.SET_ASSESSMENT_QUESTIONS,
+  payload: questions,
+})
