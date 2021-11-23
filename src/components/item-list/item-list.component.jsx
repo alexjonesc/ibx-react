@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getItems } from '../../redux/item-list/item-list.actions'
 import { selectItemListItems, selectItemListCount } from '../../redux/item-list/item-list.selectors'
 
 import './item-list.styles.scss'
@@ -45,10 +44,6 @@ class ItemList extends React.Component {
       <div className="item-list">{this.props.isFetching ? itemsListLoadng() : itemsList()}</div>
     )
   }
-
-  async componentDidMount() {
-    this.props.getItems()
-  }
 }
 
 const mapStateToProps = (state) => ({
@@ -57,8 +52,4 @@ const mapStateToProps = (state) => ({
   isFetching: state.itemList.isFetching,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  getItems: () => dispatch(getItems()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemList)
+export default connect(mapStateToProps)(ItemList)

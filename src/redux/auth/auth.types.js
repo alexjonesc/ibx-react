@@ -1,0 +1,8 @@
+const AuthTypes = {
+  AUTH_INIT: 'AUTH_INIT',
+  FETCH_PIE_TOKEN: 'FETCH_PIE_TOKEN',
+  FETCH_PIE_TOKEN_ERROR: 'FETCH_PIE_TOKEN_ERROR',
+  SET_PIE_TOKEN: 'SET_PIE_TOKEN',
+}
+
+export default AuthTypes

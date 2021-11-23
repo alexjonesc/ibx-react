@@ -6,11 +6,11 @@ import {
   fetchAssessmentError,
   setAssessmentQuestions,
 } from './assessment.actions'
-// import Auth from '../../utils/Auth'
+import { initAuth } from '../auth/auth.actions'
 import API from '../../utils/API'
 
 export function* bootstrap(action) {
-  //yield Auth.init()
+  yield put(initAuth())
 
   const assessmentId = action.payload
   try {

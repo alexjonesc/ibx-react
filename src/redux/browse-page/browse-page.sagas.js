@@ -1,14 +1,15 @@
 import { takeLatest, call, put, all } from '@redux-saga/core/effects'
 import BrowsePageTypes from './browse-page.types'
 import { browsePageReady } from './browse-page.actions'
-import { getFilters } from '../item-filters/item-filters.actions'
-import Auth from '../../utils/Auth'
+import { fetchFilters } from '../item-filters/item-filters.sagas'
+import { init as initAuth } from '../auth/auth.sagas'
+import { fetchItems } from '../item-list/item-list.sagas'
 
 export function* bootstrap() {
-  yield Auth.init()
-  yield put(getFilters())
-  //yield delay(1000) // simulate loading time
+  yield call(initAuth)
+  yield call(fetchFilters)
   yield put(browsePageReady(true))
+  yield call(fetchItems)
 }
 
 export function* initBrowsePage() {

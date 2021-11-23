@@ -1,3 +1,5 @@
+let initialized = false
+
 const getCookieValue = function (name) {
   var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'))
   return match ? match[3] : ''
@@ -43,12 +45,14 @@ function startSession() {
 const AUTH = {
   async init() {
     return new Promise(async (resolve) => {
+      if (initialized) return resolve(true)
       try {
         await createSessionScript()
         await startSession()
+        initialized = true
         resolve(true)
       } catch (e) {
-        //...
+        initialized = false
       }
     })
   },

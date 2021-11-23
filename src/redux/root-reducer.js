@@ -6,6 +6,7 @@ import browsePageReducer from './browse-page/browse-page.reducer'
 import itemFiltersReducer from './item-filters/item-filters.reducer'
 import itemListReducer from './item-list/items-list.reducer'
 import assessementReducer from './assessment/assessment.reducer'
+import authReducer from './auth/auth.reducer'
 
 const persistConfig = {
   key: 'root',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   itemFilters: itemFiltersReducer,
   itemList: itemListReducer,
   assessment: assessementReducer,
+  auth: authReducer,
 })
 
 export default persistReducer(persistConfig, rootReducer)

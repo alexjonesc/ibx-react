@@ -1,5 +1,4 @@
 import { takeLatest, call, put, all, delay, select } from '@redux-saga/core/effects'
-import ItemListTypes from './item-list.types'
 import ItemFiltersTypes from '../item-filters/item-filters.types'
 import { fetchItemsStart, fetchItemsSuccess, fetchItemsError } from './item-list.actions'
 import { selectItemFiltersSelectedFilters } from '../../redux/item-filters/item-filters.selectors'
@@ -26,14 +25,10 @@ export function* debouncedFetchItems() {
   yield call(fetchItems)
 }
 
-export function* getItems() {
-  yield takeLatest(ItemListTypes.GET_ITEMS, fetchItems)
-}
-
 export function* getItemsOnFiltersChange() {
   yield takeLatest(ItemFiltersTypes.SET_SELECTED_FILTERS, debouncedFetchItems)
 }
 
 export function* itemListSagas() {
-  yield all([call(getItems), call(getItemsOnFiltersChange)])
+  yield all([call(getItemsOnFiltersChange)])
 }
