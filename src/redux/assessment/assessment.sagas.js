@@ -7,7 +7,8 @@ import {
   setAssessmentQuestions,
 } from './assessment.actions'
 import { init as initAuth } from '../auth/auth.sagas'
-import API from '../../utils/API'
+import API from '../../services/api'
+import { API as PieApi } from '../../services/pie-api'
 
 export function* bootstrap(action) {
   yield call(initAuth)
@@ -17,6 +18,9 @@ export function* bootstrap(action) {
     yield put(fetchAssessment())
     let { assessment } = yield API.assessment({ assessmentId })
     let { questions } = yield API.assessmentQuestions({ assessmentId })
+
+    const res = yield PieApi.contentItem('538a0f71-e116-468c-a9f1-4668d9e4e996@0.0.3')
+    console.log('------>', res)
 
     yield put(setAssessment(assessment))
     yield put(setAssessmentQuestions(questions))

@@ -2,7 +2,7 @@ import { takeLatest, call, put, all, delay, select } from '@redux-saga/core/effe
 import ItemFiltersTypes from '../item-filters/item-filters.types'
 import { fetchItemsStart, fetchItemsSuccess, fetchItemsError } from './item-list.actions'
 import { selectItemFiltersSelectedFilters } from '../../redux/item-filters/item-filters.selectors'
-import API from '../../utils/API'
+import API from '../../services/api'
 
 export function* fetchItems() {
   try {

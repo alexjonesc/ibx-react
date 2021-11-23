@@ -1,7 +1,7 @@
 import { put, select } from '@redux-saga/core/effects'
 import { fetchFiltersStart, fetchFiltersSuccess, fetchFiltersError } from './item-filters.actions'
 import { selectItemFiltersFilters } from '../../redux/item-filters/item-filters.selectors'
-import API from '../../utils/API'
+import API from '../../services/api'
 
 export function* fetchFilters() {
   const cFilters = yield select(selectItemFiltersFilters)
