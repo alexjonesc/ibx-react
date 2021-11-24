@@ -47,14 +47,12 @@ const AssessmentView = (props) => {
                   ></pie-player>
                   <Query query={CONTENT_ITEM} variables={{ versionedID: item.remoteIdVersioned }}>
                     {({ loading, data }) => {
-                      // hack to make player work
                       if (!loading && data && data.contentItem) {
-                        setTimeout(() => {
+                        window.customElements.whenDefined('pie-player').then(() => {
                           const player = document.getElementById(`player-${item.itemId}`)
                           player.config = data.contentItem.config
-                        }, 0)
+                        })
                       }
-
                       return ''
                     }}
                   </Query>
